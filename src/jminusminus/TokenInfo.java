@@ -22,8 +22,24 @@ enum TokenKind {
             "("), RPAREN(")"), LCURLY("{"), RCURLY("}"), LBRACK("["), RBRACK(
             "]"), SEMI(";"), COMMA(","), DOT("."), IDENTIFIER("<IDENTIFIER>"), INT_LITERAL(
             "<INT_LITERAL>"), CHAR_LITERAL("<CHAR_LITERAL>"), STRING_LITERAL(
-            "<STRING_LITERAL>");
-
+            "<STRING_LITERAL>"),
+    
+    		// Java operator tokens for question 2.11. NOT supported by J--
+		    DIV("/"), BAND("&"), BOR("|"), LOR("||"), BXOR("^"), BCOMPLIMENT("~"), LT("<"), 
+		    GE(">="), NEQUAL("!="), MINUS_ASSIGN("-="), MULT_ASSIGN("*="), DIV_ASSIGN("/="), 
+		    MODULO("%"), MOD_ASSIGN("%="), BAND_ASSIGN("&="), BOR_ASSIGN("|="), BXOR_ASSIGN("^="), 
+		    LSHIFT("<<"), LSHIFT_ASSIGN("<<="), 
+		    RSHIFT(">>"), RSHIFT_ASSIGN(">>="), RSHIFTZ(">>>"), RSHIFTZ_ASSIGN(">>>="),
+    
+			// Java reserved words for question 2.12. NOT supported by J--
+			ASSERT("assert"), BREAK("break"), BYTE("byte"), CASE("case"), CATCH("catch"),
+			CONST("const"), CONTINUE("continue"), DEFAULT("default"), DO("do"), DOUBLE("double"),
+			ENUM("enum"), FINAL("final"), FINALLY("finally"), FLOAT("float"), FOR("for"),
+			GOTO("goto"), IMPLEMENTS("implements"), INTERFACE("interface"), LONG("long"),
+			NATIVE("native"), SHORT("short"), STRICTFP("strictfp"), SWITCH("switch"), 
+			SYNCHRONIZED("synchronized"), THROW("throw"), THROWS("throws"), TRANSIENT("transient"),
+			TRY("try"), VOLATILE("volatile");
+	
     /** The token's string representation. */
     private String image;
 
