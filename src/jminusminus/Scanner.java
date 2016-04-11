@@ -385,30 +385,217 @@ class Scanner {
 				buffer.append("\"");
 			}
 			return new TokenInfo(STRING_LITERAL, buffer.toString(), line);
+			
+			//Float and Double literals partially handled here
 		case '.':
-			nextCh();
-			return new TokenInfo(DOT, line);
-		case EOFCH:
-			return new TokenInfo(EOF, line);
-		case '0':
-			// Handle only simple decimal integers for now.
-			nextCh();
-			return new TokenInfo(INT_LITERAL, "0", line);
-		case '1':
-		case '2':
-		case '3':
-		case '4':
-		case '5':
-		case '6':
-		case '7':
-		case '8':
-		case '9':
 			buffer = new StringBuffer();
-			while (isDigit(ch)) {
-				buffer.append(ch);
-				nextCh();
-			}
-			return new TokenInfo(INT_LITERAL, buffer.toString(), line);
+            buffer.append(ch);
+            nextCh();
+            if (isDigit(ch)) { 
+                buffer.append(ch);
+                nextCh();
+                // Boolean is used to ensure there is at minimum 1 following digit for validity 
+                boolean followingDigits = true;
+                while (isDigit(ch)) {
+                    buffer.append(ch);
+                    nextCh();
+                }
+                if (ch == 'e' || ch == 'E') {
+                    buffer.append(ch);
+                    nextCh();
+                    if (ch == '+' || ch == '-') {
+                        buffer.append(ch);
+                        nextCh();
+                    }
+                    followingDigits = false;
+                    while (isDigit(ch)) {
+                        buffer.append(ch);
+                        nextCh();
+                        followingDigits = true;
+                    }
+                }
+                if (followingDigits) {
+                	if (ch == 'f' || ch == 'F') {
+                        buffer.append(ch);
+                        nextCh();
+                        return new TokenInfo(FLOAT_LITERAL, buffer.toString(), line);   
+                    } else {
+                    	if (ch == 'd' || ch == 'D') {
+                    		buffer.append(ch);
+                    		nextCh();
+                    	}
+                        return new TokenInfo(DOUBLE_LITERAL, buffer.toString(), line);                             	         
+                    }
+                } else {
+                    reportScannerError("The Double or Float Literal is incorrect.");
+                }
+            } else {
+                return new TokenInfo(DOT, line);
+            }
+        case EOFCH:
+            return new TokenInfo(EOF, line);
+        case '0':
+            boolean followingDigits = false; 
+            buffer = new StringBuffer();
+            buffer.append(ch);
+            nextCh();
+           
+            // HEX LITERALS
+            if (ch == 'x' || ch == 'X') { 
+                buffer.append(ch);
+                nextCh();
+                while (isDigit(ch) || (ch >= 'a' && ch <= 'f') 
+                        || (ch >= 'A' && ch <= 'F')) {
+                    buffer.append(ch);
+                    nextCh();
+                    followingDigits = true;
+                }
+                if (followingDigits) {
+                    return new TokenInfo(HEX_INT_LITERAL, buffer.toString(), line);
+                } else {
+                    reportScannerError("The Hex Literal is incorrect");
+                }
+                
+            // OCTAL LITERALS
+            } else if (ch >= '0' && ch <= '7') { 
+                buffer.append(ch);
+                nextCh();
+                while (ch >= '0' && ch <= '7') {
+                    buffer.append(ch);
+                    nextCh();
+                }
+                return new TokenInfo(OCTAL_INT_LITERAL, buffer.toString(), line);
+           
+            //BINARY LITERALS
+            } else if (ch == 'b' || ch == 'B') { 
+                    buffer.append(ch);
+                    nextCh();
+                    while (ch == '0' || ch == '1') {
+                        buffer.append(ch);
+                        nextCh();
+                        followingDigits = true;
+                    } if (followingDigits) {
+                        return new TokenInfo(BINARY_INT_LITERAL, buffer.toString(), line);
+                    } else {
+                        reportScannerError("The Binary Literal is incorrect.");
+                    } 
+            
+            // DOUBLE | FLOAT LITERALS
+            } else if (ch == 'f' || ch == 'F') { 
+                buffer.append(ch);
+                nextCh();
+                return new TokenInfo(FLOAT_LITERAL, buffer.toString(), line);
+            } else if (ch == 'd' || ch == 'D') {
+                buffer.append(ch);
+                nextCh();
+                return new TokenInfo(DOUBLE_LITERAL, buffer.toString(), line);
+            } else if (ch == 'e' || ch == 'E') { 
+                buffer.append(ch);
+                nextCh();
+                followingDigits = false; 
+                boolean isDouble = true; 
+                if (ch == '+' || ch == '-') {
+                    buffer.append(ch);
+                    nextCh();
+                }
+                while (isDigit(ch)) {
+                    buffer.append(ch);
+                    nextCh();
+                    followingDigits = true;
+                }
+                if (ch == 'f' || ch == 'F') {
+                    buffer.append(ch);
+                    nextCh();
+                    isDouble = false;
+                } else if (ch == 'd' || ch == 'D') {                   
+                    buffer.append(ch);
+                    nextCh();
+                }
+                if (followingDigits) {
+                    if (isDouble) {
+                        return new TokenInfo(DOUBLE_LITERAL, buffer.toString(), line);
+                    } else {
+                        return new TokenInfo(FLOAT_LITERAL, buffer.toString(), line);
+                    }
+                } else {
+                    reportScannerError("The Float Literal is incorrect.");
+                }
+                
+            // Similar code from '.' case above
+            } else if (ch == '.') { 
+                buffer.append(ch);
+                nextCh();
+                if (isDigit(ch)) { 
+                    buffer.append(ch);
+                    nextCh();
+                    followingDigits = true;
+                    while (isDigit(ch)) {
+                        buffer.append(ch);
+                        nextCh();
+                    }
+                    if (ch == 'e' || ch == 'E') {
+                        buffer.append(ch);
+                        nextCh();
+                        if (ch == '+' || ch == '-') {
+                            buffer.append(ch);
+                            nextCh();
+                        }
+                        followingDigits = false;
+                        while (isDigit(ch)) {
+                            buffer.append(ch);
+                            nextCh();
+                            followingDigits = true;
+                        }
+                    }
+                    if (followingDigits) {
+                        if (ch == 'f' || ch == 'F') {
+                            buffer.append(ch);
+                            nextCh();
+                            return new TokenInfo(FLOAT_LITERAL, buffer.toString(), line);
+                        } else {
+                            if (ch == 'd' || ch == 'D') {
+                                buffer.append(ch);
+                                nextCh();
+                            }
+                            return new TokenInfo(DOUBLE_LITERAL, buffer.toString(), line);
+                        }
+                    } else {
+                        reportScannerError("The Double or Float Literal is incorrect.");
+                    }
+                } else {
+                    return new TokenInfo(DOUBLE_LITERAL, buffer.toString(), line);
+                }
+            } else {
+                return new TokenInfo(INT_LITERAL, "0", line);
+            }
+            break;
+        case '1':
+        	runCase();
+        	break;
+        case '2':
+        	runCase();
+        	break;
+        case '3':
+        	runCase();
+        	break;
+        case '4':
+        	runCase();
+        	break;
+        case '5':
+        	runCase();
+        	break;
+        case '6':
+        	runCase();
+        	break;
+        case '7':
+        	runCase();
+        	break;
+        case '8':
+        	runCase();
+        	break;
+        case '9': 
+            runCase();
+            break;
 		default:
 			if (isIdentifierStart(ch)) {
 				buffer = new StringBuffer();
@@ -429,7 +616,116 @@ class Scanner {
 			}
 		}
 	}
-
+	
+	private runCase() {
+		buffer = new StringBuffer();
+        while (isDigit(ch)) {
+            buffer.append(ch);
+            nextCh();
+        }
+        // LONG LITERALS
+        if (ch == 'l' || ch == 'L') { 
+            buffer.append(ch);
+            nextCh();
+            return new TokenInfo(LONG_LITERAL, buffer.toString(), line);
+        } else if (ch == 'f' || ch == 'F') {
+            buffer.append(ch);
+            nextCh();
+            return new TokenInfo(FLOAT_LITERAL, buffer.toString(), line);
+        } else if (ch == 'd' || ch == 'D') { 
+            buffer.append(ch);
+            nextCh();
+            return new TokenInfo(DOUBLE_LITERAL, buffer.toString(), line);
+        } else if (ch == 'e' || ch == 'E') { 
+            buffer.append(ch);
+            nextCh();
+            followingDigits = false;
+            // check for double values
+            boolean isDouble = true; 
+            if (ch == '+' || ch == '-') {
+                buffer.append(ch);
+                nextCh();
+            }
+            while (isDigit(ch)) {
+                buffer.append(ch);
+                nextCh();
+                followingDigits = true;
+            }
+            if (ch == 'f' || ch == 'F') {
+                buffer.append(ch);
+                nextCh();
+                isDouble = false;
+            } else if (ch == 'd' || ch == 'D') {                    
+                buffer.append(ch);
+                nextCh();
+            }
+            if (followingDigits) {
+                if (isDouble) {
+                    return new TokenInfo(DOUBLE_LITERAL, buffer.toString(), line);
+                } else {
+                    return new TokenInfo(FLOAT_LITERAL, buffer.toString(), line);
+                }
+            } else {
+                reportScannerError("The Float Literal is incorrect.");
+            }
+        // Similar '.' case code from above
+        } else if (ch == '.') { 
+            buffer.append(ch);
+            nextCh();
+            if (isDigit(ch)) {
+                buffer.append(ch);
+                nextCh();
+                followingDigits = true;
+                while (isDigit(ch)) {
+                    buffer.append(ch);
+                    nextCh();
+                }
+                if (ch == 'e' || ch == 'E') {
+                    buffer.append(ch);
+                    nextCh();
+                    if (ch == '+' || ch == '-') {
+                        buffer.append(ch);
+                        nextCh();
+                    }
+                    followingDigits = false;
+                    while (isDigit(ch)) {
+                        buffer.append(ch);
+                        nextCh();
+                        followingDigits = true;
+                    }
+                }
+                if (followingDigits) {
+                    if (ch == 'f' || ch == 'F') {
+                        buffer.append(ch);
+                        nextCh();
+                        return new TokenInfo(FLOAT_LITERAL, buffer.toString(), line);
+                    } else {
+                        if (ch == 'd' || ch == 'D') {
+                            buffer.append(ch);
+                            nextCh();
+                        }
+                        return new TokenInfo(DOUBLE_LITERAL, buffer.toString(), line);
+                    }
+                } else {
+                    reportScannerError("The Double or Float literal is incorrect.");
+                }
+            } else {
+                if (ch == 'f' || ch == 'F') {
+                    buffer.append(ch);
+                    nextCh();
+                    return new TokenInfo(FLOAT_LITERAL, buffer.toString(), line);
+                } else {
+                    if (ch == 'd' || ch == 'D') {
+                        buffer.append(ch);
+                        nextCh();
+                    }
+                    return new TokenInfo(DOUBLE_LITERAL, buffer.toString(), line);
+                }
+            }
+        } else { 
+            return new TokenInfo(INT_LITERAL, buffer.toString(), line);
+        }
+	}
 	/**
 	 * Scan and return an escaped character.
 	 * 
