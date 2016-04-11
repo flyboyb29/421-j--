@@ -38,11 +38,7 @@ enum TokenKind {
 			SYNCHRONIZED("synchronized"), THROW("throw"), THROWS("throws"), TRANSIENT("transient"),
 			TRY("try"), VOLATILE("volatile"),
 	
-<<<<<<< HEAD
-			//LITERALS for 2.13 and 2.14
-=======
-		//LITERALS for 2.13 and 2.14
->>>>>>> 397a770b33e7ebb7d11b93fa9e9c8263d196e763
+      		//LITERALS for 2.13 and 2.14
     		IDENTIFIER("<IDENTIFIER>"), INT_LITERAL("<INT_LITERAL>"), 
     		HEX_INT_LITERAL("<HEX_INT_LITERAL>"), LONG_LITERAL("<LONG_LITERAL>"), 
     		DOUBLE_LITERAL("<DOUBLE_LITERAL>"), FLOAT_LITERAL("<FLOAT_LITERAL>"),
