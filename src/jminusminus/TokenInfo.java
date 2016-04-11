@@ -20,9 +20,7 @@ enum TokenKind {
             "+"), ASSIGN("="), DEC("--"), EQUAL("=="), GT(">"), INC("++"), LAND(
             "&&"), LE("<="), LNOT("!"), MINUS("-"), PLUS_ASSIGN("+="), STAR("*"), LPAREN(
             "("), RPAREN(")"), LCURLY("{"), RCURLY("}"), LBRACK("["), RBRACK(
-            "]"), SEMI(";"), COMMA(","), DOT("."), IDENTIFIER("<IDENTIFIER>"), INT_LITERAL(
-            "<INT_LITERAL>"), CHAR_LITERAL("<CHAR_LITERAL>"), STRING_LITERAL(
-            "<STRING_LITERAL>"),
+            "]"), SEMI(";"), COMMA(","), DOT("."),
     
     		// Java operator tokens for question 2.11. NOT supported by J--
 		    DIV("/"), BAND("&"), BOR("|"), LOR("||"), BXOR("^"), BCOMPLIMENT("~"), LT("<"), 
@@ -38,7 +36,16 @@ enum TokenKind {
 			GOTO("goto"), IMPLEMENTS("implements"), INTERFACE("interface"), LONG("long"),
 			NATIVE("native"), SHORT("short"), STRICTFP("strictfp"), SWITCH("switch"), 
 			SYNCHRONIZED("synchronized"), THROW("throw"), THROWS("throws"), TRANSIENT("transient"),
-			TRY("try"), VOLATILE("volatile");
+			TRY("try"), VOLATILE("volatile"),
+	
+		//LITERALS for 2.13 and 2.14
+    		IDENTIFIER("<IDENTIFIER>"), INT_LITERAL("<INT_LITERAL>"), 
+    		HEX_INT_LITERAL("<HEX_INT_LITERAL>"), LONG_LITERAL("<LONG_LITERAL>"), 
+    		DOUBLE_LITERAL("<DOUBLE_LITERAL>"), FLOAT_LITERAL("<FLOAT_LITERAL>"),
+    		CHAR_LITERAL("<CHAR_LITERAL>"), STRING_LITERAL("<STRING_LITERAL>"),
+    		BOOLEAN_LITERAL("<BOOLEAN_LITERAL>"), BINARY_INT_LITERAL("<BINARY_INT_LITERAL>"), 
+    		NULL_LITERAL("<NULL_LITERAL>"), OCTAL_INT_LITERAL("<OCTAL_INT_LITERAL>");
+    		
 	
     /** The token's string representation. */
     private String image;
