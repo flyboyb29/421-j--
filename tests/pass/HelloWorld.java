@@ -10,7 +10,7 @@ public class HelloWorld {
     	/*
     	 * multi-line
     	 */
-    	 //double literal
+    	
     	return "Hello, World!";
     }
 
