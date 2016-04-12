@@ -1,0 +1,30 @@
+Homework 1 Report
+Group: Chetanya Chopra, Jason Hall, Cody Cates
+
+All operators, reserved words, and literals can be identified by the scanner but their functionality has not been implemented yet.
+
+Exercise 2.10 
+Completed by Jason
+	Implemented and working properly
+
+Exercise 2.11
+Completed by Cody
+	The j— compiler recognizes and returns all java operators but their functions are not yet 	implemented. 
+
+Exercise 2.12
+Completed by Cody
+	The j— compiler recognizes and returns all java reserved words but their functions are not yet 	implemented.
+
+Exercise 2.13
+Completed by Chetanya 
+	The j— compiler can recognize and return java DOUBLE_LITERALS. What is done with this 	literal is not yet implemented. 
+	
+Exercise 2.14
+Completed by Chetanya 
+	The j— compiler can recognize and return java FLOAT_LITERALS and LONG_LITERALS. 	What is done with these literals is not yet implemented. 
+
+Exercise 2.15
+Completed by Chetanya 
+	The j— compiler can recognize and return java HEX_LITERALS, OCTAL_LITERALS, and 	BINARY_INT_LITERALS. What is done with these literals is not yet implemented 
+	
+
