@@ -16,6 +16,11 @@ public class HelloWorld {
 
     public static void main(String[] args) {
     	// single line
+    	int j = 010;
+    	j = 0x0155;
+    	j = 019;
+    	j = 013452;
+    	j = 8.59;
     	System.out.println(HelloWorld.message());
     }
 
