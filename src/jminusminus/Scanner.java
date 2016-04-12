@@ -563,10 +563,7 @@ class Scanner {
             } else {
                 return new TokenInfo(INT_LITERAL, "0", line);
             }
-<<<<<<< HEAD
          
-=======
->>>>>>> origin/master
         case '1':
         case '2':
         case '3':
@@ -576,11 +573,7 @@ class Scanner {
         case '7':
         case '8':
         case '9': 
-<<<<<<< HEAD
         	buffer = new StringBuffer();
-=======
-    		buffer = new StringBuffer();
->>>>>>> origin/master
             while (isDigit(ch)) {
                 buffer.append(ch);
                 nextCh();
@@ -685,7 +678,6 @@ class Scanner {
                     }
                 }
             } else { 
-<<<<<<< HEAD
             	if (badInt) {
             		reportScannerError("The Octal Literal is incorrect.");
             		
@@ -694,10 +686,6 @@ class Scanner {
             	}
             }
 
-=======
-                return new TokenInfo(INT_LITERAL, buffer.toString(), line);
-            }
->>>>>>> origin/master
 		default:
 			if (isIdentifierStart(ch)) {
 				buffer = new StringBuffer();
@@ -712,24 +700,16 @@ class Scanner {
 					return new TokenInfo(IDENTIFIER, identifier, line);
 				}
 			} else {
-<<<<<<< HEAD
 				if (!badInt) {
 					reportScannerError("Unidentified input token: '%c'", ch);
 					badInt = false;
 				}
-=======
-				reportScannerError("Unidentified input token: '%c'", ch);
->>>>>>> origin/master
 				nextCh();
 				return getNextToken();
 			}
 		}
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> origin/master
 	/**
 	 * Scan and return an escaped character.
 	 * 
