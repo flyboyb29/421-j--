@@ -29,6 +29,15 @@ class Type {
 
     /** Maps type names to their Type representations. */
     private static Hashtable<String, Type> types = new Hashtable<String, Type>();
+   
+    /** The primitive type, double. */ //3.21
+    public final static Type DOUBLE = typeFor(double.class);
+    
+    /** The primitive type, float. */ //3.21
+    public final static Type FLOAT = typeFor(float.class);
+    
+    /** The primitive type, long. */ //3.22
+    public final static Type LONG = typeFor(long.class);
 
     /** The primitive type, int. */
     public final static Type INT = typeFor(int.class);
@@ -38,6 +47,15 @@ class Type {
 
     /** The primitive type, boolean. */
     public final static Type BOOLEAN = typeFor(boolean.class);
+    
+    /** java.lang.Double. */ //Added Exercise 3.21
+    public final static Type BOXED_DOUBLE = typeFor(java.lang.Double.class);
+    
+    /** java.lang.Float. */ //Added Exercise 3.21
+    public final static Type BOXED_FLOAT = typeFor(java.lang.Float.class);
+    
+    /** java.lang.Long. */ //Added Exercise 3.22
+    public final static Type BOXED_LONG = typeFor(java.lang.Long.class);
 
     /** java.lang.Integer. */
     public final static Type BOXED_INT = typeFor(java.lang.Integer.class);
@@ -415,7 +433,10 @@ class Type {
                 : cls.isArray() ? "[" + descriptorFor(cls.getComponentType())
                         : cls.isPrimitive() ? (cls == int.class ? "I"
                                 : cls == char.class ? "C"
-                                        : cls == boolean.class ? "Z" : "?")
+                                : cls == double.class ? "D" //Added 3.21
+                                : cls == float.class ? "F" //Added 3.21
+                                : cls == long.class ? "L" //Added 3.22
+                                : cls == boolean.class ? "Z" : "?")
                                 : "L" + cls.getName().replace('.', '/') + ";";
     }
 

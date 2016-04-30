@@ -39,7 +39,7 @@ public class Literals {
         
         //hex int
         int h = 0xA454E;
-        h = 0XABCDEF0123456789; 
+        h = 0XA6789; 
 
 	}
 

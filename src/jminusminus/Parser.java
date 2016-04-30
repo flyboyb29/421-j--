@@ -278,8 +278,9 @@ public class Parser {
      * @return true iff we're looking at a basic type; false otherwise.
      */
 
+    //3.21 | 3.22
     private boolean seeBasicType() {
-        if (see(BOOLEAN) || see(CHAR) || see(INT)) {
+    	if (see(BOOLEAN) || see(CHAR) || see(INT) || see(DOUBLE) || see(FLOAT)|| see(LONG)) {
             return true;
         } else {
             return false;
@@ -1411,6 +1412,12 @@ public class Parser {
             return new JLiteralFalse(line);
         } else if (have(NULL)) {
             return new JLiteralNull(line);
+        } else if (have(DOUBLE_LITERAL)) { //Added Exercise 3.21
+            return new JLiteralDouble(line, scanner.previousToken().image());
+        } else if (have(FLOAT_LITERAL)) { //Added Exercise 3.21
+            return new JLiteralFloat(line, scanner.previousToken().image());
+        } else if (have(LONG_LITERAL)) { //Added Exercise 3.22
+            return new JLiteralLong(line, scanner.previousToken().image());
         } else {
             reportParserError("Literal sought where %s found", scanner.token()
                     .image());
