@@ -24,6 +24,9 @@ class JMethodDeclaration
     /** The formal parameters. */
     protected ArrayList<JFormalParameter> params;
 
+    /** Throwable exceptions. */
+    protected ArrayList<Type> canThrow;
+
     /** Method body. */
     protected JBlock body;
 
@@ -77,6 +80,16 @@ class JMethodDeclaration
         this.isStatic = mods.contains("static");
         this.isPrivate = mods.contains("private");
     }
+    
+    public JMethodDeclaration(int line, ArrayList<String> mods,
+            String name, Type returnType,
+            ArrayList<JFormalParameter> params,
+            ArrayList<Type> canThrow,JBlock body)
+
+        {
+            this(line, mods, name, returnType, params, body);
+            this.canThrow = canThrow;
+        }
 
     /**
      * Declare this method in the parent (class) context.

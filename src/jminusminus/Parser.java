@@ -552,6 +552,7 @@ public class Parser {
             mustBe(IDENTIFIER);
             String name = scanner.previousToken().image();
             ArrayList<JFormalParameter> params = formalParameters();
+            ArrayList<Type> throwable = have(THROWS) ? throwable() : null;
             JBlock body = block();
             memberDecl = new JConstructorDeclaration(line, mods, name, params,
                     body);
@@ -563,9 +564,10 @@ public class Parser {
                 mustBe(IDENTIFIER);
                 String name = scanner.previousToken().image();
                 ArrayList<JFormalParameter> params = formalParameters();
+                ArrayList<Type> throwable = have(THROWS) ? throwable() : null;
                 JBlock body = have(SEMI) ? null : block();
                 memberDecl = new JMethodDeclaration(line, mods, name, type,
-                        params, body);
+                        params, throwable, body);
             } else {
                 type = type();
                 if (seeIdentLParen()) {
@@ -665,6 +667,27 @@ public class Parser {
             }
         } else if (have(SEMI)) {
             return new JEmptyStatement(line);
+        } else if (have(TRY)) {
+        	JStatement body = statement();
+        	ArrayList<JCatchStatement> catches = new ArrayList<JCatchStatement>();
+        	mustBe(CATCH);
+        	do {
+        		JFormalParameter catchable;
+        		mustBe(LPAREN);
+        		catchable = formalParameter();
+        		mustBe(RPAREN);
+        		catches.add(new JCatchStatement(line, catchable, statement()));
+        	} while (have(CATCH));
+        	if (have(FINALLY)) {
+        		JStatement finallyStatement = statement();
+        		return new JTryStatement(line, body, catches, finallyStatement);
+        	} else {
+        		return new JTryStatement(line, body, catches); 
+        	}
+        } else if (have(THROW)) {
+        	JExpression expr = expression();
+            mustBe(SEMI);
+        	return new JThrowStatement(line, expr);
         } else { // Must be a statementExpression
             JStatement statement = statementExpression();
             mustBe(SEMI);
@@ -1423,6 +1446,20 @@ public class Parser {
                     .image());
             return new JWildExpression(line);
         }
+    }
+    
+    /**
+     * Parse a throwable.
+     * 
+     * 
+     * @return An ArrayList of throwable Types
+     */
+    private ArrayList<Type> throwable() {
+    	ArrayList<Type> throwables = new ArrayList<Type>();
+    	do {
+        	throwables.add(qualifiedIdentifier());
+    	} while (have(COMMA));
+    	return throwables;
     }
 
     // A tracing aid. Invoke to debug the parser at various
