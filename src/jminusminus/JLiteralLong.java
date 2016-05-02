@@ -49,8 +49,7 @@ class JLiteralLong extends JExpression {
             text = text.substring(0, text.length()-1);
         }
         long l = Long.parseLong(text);
-        output.addLDCInstruction(l);
-        /** @TODO not sure if this needs more */     
+        output.addLDCInstruction(l);  
     }
 
     /**

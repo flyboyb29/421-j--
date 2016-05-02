@@ -46,8 +46,7 @@ class JLiteralFloat extends JExpression {
 
     public void codegen(CLEmitter output) {
         float f = Float.parseFloat(text);
-        output.addLDCInstruction(f);
-        /** @TODO not sure if this needs more */     
+        output.addLDCInstruction(f);   
     }
 
     /**
