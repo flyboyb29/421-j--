@@ -1,30 +1,52 @@
-Homework 1 Report
+Homework 2 Report
 Group: Chetanya Chopra, Jason Hall, Cody Cates
 
 All operators, reserved words, and literals can be identified by the scanner but their functionality has not been implemented yet.
 
-Exercise 2.10 
-Completed by Jason
-	Implemented and working properly
+Exercise 3.21 
+Completed by Chetanya
+	Parser returns Float and Double
 
-Exercise 2.11
-Completed by Cody
-	The j— compiler recognizes and returns all java operators but their functions are not yet 	implemented. 
+Exercise 3.22
+Completed by Chetanya
+	Parser returns Longs
 
-Exercise 2.12
-Completed by Cody
-	The j— compiler recognizes and returns all java reserved words but their functions are not yet 	implemented.
-
-Exercise 2.13
-Completed by Chetanya 
-	The j— compiler can recognize and return java DOUBLE_LITERALS. What is done with this 	literal is not yet implemented. 
+Exercise 3.23
+Completed by Chetanya
+	Parser returns operators not yet defined by j—
 	
-Exercise 2.14
-Completed by Chetanya 
-	The j— compiler can recognize and return java FLOAT_LITERALS and LONG_LITERALS. 	What is done with these literals is not yet implemented. 
 
-Exercise 2.15
+Exercise 3.24
 Completed by Chetanya 
-	The j— compiler can recognize and return java HEX_LITERALS, OCTAL_LITERALS, and 	BINARY_INT_LITERALS. What is done with these literals is not yet implemented 
+	Parser returns nodes for conditional expressions
+	
+Exercise 3.25
+Completed by Chetanya/Jason 
+	Parser recognizes for loop statement
+
+Exercise 3.26
+Completed by Chetanya/Jason
+	Parser recognizes the switch statement 
+
+Exercise 3.27
+Completed by Cody
+	Parser recognizes try catch statements  
+
+Exercise 3.28
+Completed by Cody
+	Parser recognizes do throws statement
+
+Exercise 3.29
+Completed by Cody
+	Parser recognizes do throws clause
+
+Exercise 3.30
+Completed by Jason
+	Done but not completely sure
+
+Exercise 3.34
+Completed by Jason 
+	Parser recognizes do until and do while statements
+ 
 	
 
