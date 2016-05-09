@@ -169,10 +169,10 @@ class JMethodDeclaration
         }
         if (body != null) {
             body = body.analyze(this.context);
-	    if (returnType!=Type.VOID && ! methodContext.methodHasReturn()){
-		JAST.compilationUnit.reportSemanticError(line(),
-		    "Non-void method must have a return statement");
-	    }
+            if (returnType!=Type.VOID && ! methodContext.methodHasReturn()){
+            	JAST.compilationUnit.reportSemanticError(line(), 
+            			"Non-void method must have a return statement");
+            }
         }
 	return this;
     }

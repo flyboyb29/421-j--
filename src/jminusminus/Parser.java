@@ -667,11 +667,11 @@ public class Parser {
         		   return new JDoUntilStatement(line, statement, test);
         	   }
         } else if (have(FOR)){
-        	   JExpression test = parExpression();
-        	   JStatement statement = statement();
-        	   return new JForLoopStatement(line, test, statement);
+        //	JExpression test = parExpression();
+        //	JStatement statement = statement();
+        //	return new JForLoopStatement(line, test, statement);
         } else if (have(SWITCH)){
-        	   // still do
+        	// still do
         } else if (have(RETURN)) {
             if (have(SEMI)) {
                 return new JReturnStatement(line, null);

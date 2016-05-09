@@ -746,6 +746,10 @@ class Type {
         return signature;
     }
 
+	public boolean isPublic() {
+		return Modifier.isPublic(classRep.getModifiers());
+	}
+
 }
 
 /**

@@ -196,7 +196,13 @@ class JClassDeclaration extends JAST implements JTypeDecl {
      */
 
     public JAST analyze(Context context) {
-        // Analyze all members
+        
+    	// makes sure that
+    	if (!thisType.isPublic() && !thisType.isAbstract()) {
+    		JAST.compilationUnit.reportSemanticError(line, "Class must be declared either public or abstract.");
+    	}
+    	
+    	// Analyze all members
         for (JMember member : classBlock) {
             ((JAST) member).analyze(this.context);
         }
