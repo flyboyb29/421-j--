@@ -2,8 +2,6 @@
 
 package jminusminus;
 
-import static jminusminus.CLConstants.*;
-
 public class JCatchStatement extends JStatement {
 	
 	/** The argument to catch. */

@@ -3,8 +3,6 @@
 package jminusminus;
 
 import java.util.ArrayList;
-import static jminusminus.CLConstants.*;
-
 
 public class JTryStatement extends JStatement {
 	/** The body. */
@@ -13,7 +11,7 @@ public class JTryStatement extends JStatement {
 	/** The following catch statements. */
 	private ArrayList<JCatchStatement> catches;
 	
-	/** The finally statement. Nullable. */
+	/** The finally statement. */
 	private JStatement finallyBody;
 	
 	
@@ -30,15 +28,18 @@ public class JTryStatement extends JStatement {
 	}
 	
 	@Override
-	public JAST analyze(Context arg0) {
+	public JTryStatement analyze(Context context) {
 		// TODO Auto-generated method stub
-		return null;
+		body = (JStatement) body.analyze(context);
+		
+		if (finallyBody != null) finallyBody = (JStatement) finallyBody.analyze(context);
+		return this;
 	}
 
 	@Override
 	public void codegen(CLEmitter arg0) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
     /**
