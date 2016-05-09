@@ -2,8 +2,6 @@
 
 package jminusminus;
 
-import static jminusminus.CLConstants.*;
-
 public class JThrowStatement extends JStatement {
 	
 	/** The thrown expression. */
