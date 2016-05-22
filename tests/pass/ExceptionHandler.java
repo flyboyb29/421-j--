@@ -9,16 +9,14 @@ public class ExceptionHandler {
 		super();
 	}
 
-	private static void divide() throws IllegalArgumentException {
-		for (int i = 10; i >= 0; i--) {
-			if (i == 0) throw new IllegalArgumentException();
-			System.out.print( (10/i) + ", ");
-		}
+	private static int divide(int i) throws IllegalArgumentException {
+		if (i == 0) throw new IllegalArgumentException();
+		return i;
 	}
 	
 	public static void main(String[] args) {
 		try {
-			divide();
+			int retVal = divide(0);
 		} catch (IllegalArgumentException e) {
 			System.out.println("Caught IllegalArgumentException.");
 		} finally {
