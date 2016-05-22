@@ -1112,7 +1112,6 @@ public class Parser {
         int line = scanner.token().line();
         boolean more = true;        
         JExpression lhs = inclusiveOrExpression();
-        
         while (more) {
             if (have(LAND)) {
                 lhs = new JLogicalAndOp(line, lhs, inclusiveOrExpression());
@@ -1145,7 +1144,7 @@ public class Parser {
     			more = false;
     		}
     	}
-    	return null;
+    	return lhs;
     }
     
     /**
@@ -1170,7 +1169,7 @@ public class Parser {
     			more = false;
     		}
     	}
-    	return null;
+    	return lhs;
     }
     
     /**
@@ -1195,7 +1194,7 @@ public class Parser {
     			more = false;
     		}
     	}
-    	return null;
+    	return lhs;
     }
     
     /**

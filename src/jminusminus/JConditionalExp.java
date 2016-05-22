@@ -17,9 +17,9 @@ public class JConditionalExp extends JExpression {
 
     public JExpression analyze(Context context) {
         condition = (JExpression) condition.analyze(context);
+        condition.type().mustMatchExpected(line(), Type.BOOLEAN);
         consequent = (JExpression) consequent.analyze(context);
         alternate = (JExpression) alternate.analyze(context);
-        condition.type().mustMatchExpected(line(), Type.BOOLEAN);
         consequent.type().mustMatchExpected(line(),alternate.type());
         type = consequent.type();
         return this;
@@ -43,7 +43,26 @@ public class JConditionalExp extends JExpression {
     /**
      * @inheritDoc
      */
-    public void writeToStdOut(PrettyPrinter p) {     
+    public void writeToStdOut(PrettyPrinter p) {  
+        p.printf("<JConditionalExp line=\"%d\">\n", line());
+        p.indentRight();
+        p.printf("<TestExpression>\n");
+        p.indentRight();
+        condition.writeToStdOut(p);
+        p.indentLeft();
+        p.printf("</TestExpression>\n");
+        p.printf("<ConsequentClause>\n");
+        p.indentRight();
+        consequent.writeToStdOut(p);
+        p.indentLeft();
+        p.printf("</ConsequentClause>\n");
+        p.printf("<AlternateClause>\n");
+        p.indentRight();
+        alternate.writeToStdOut(p);
+        p.indentLeft();
+        p.printf("</AlternateClause>\n");
+        p.indentLeft();
+        p.printf("</JConditionalExp>\n");
     }
 
 }
