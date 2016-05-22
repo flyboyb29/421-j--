@@ -185,6 +185,12 @@ class Scanner {
 		case '}':
 			nextCh();
 			return new TokenInfo(RCURLY, line);
+		case '?':
+			nextCh();
+			return new TokenInfo(TERNARY, line);
+		case ':':
+			nextCh();
+			return new TokenInfo(COLON, line);
 		case '[':
 			nextCh();
 			return new TokenInfo(LBRACK, line);

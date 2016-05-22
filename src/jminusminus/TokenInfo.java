@@ -26,7 +26,7 @@ enum TokenKind {
 		    DIV("/"), BAND("&"), BOR("|"), LOR("||"), BXOR("^"), BCOMPLIMENT("~"), LT("<"), 
 		    GE(">="), NEQUAL("!="), MINUS_ASSIGN("-="), MULT_ASSIGN("*="), DIV_ASSIGN("/="), 
 		    MODULO("%"), MOD_ASSIGN("%="), BAND_ASSIGN("&="), BOR_ASSIGN("|="), BXOR_ASSIGN("^="), 
-		    LSHIFT("<<"), LSHIFT_ASSIGN("<<="), 
+		    LSHIFT("<<"), LSHIFT_ASSIGN("<<="), TERNARY("?"), COLON(":"),
 		    RSHIFT(">>"), RSHIFT_ASSIGN(">>="), RSHIFTZ(">>>"), RSHIFTZ_ASSIGN(">>>="),
     
 			// Java reserved words for question 2.12. NOT supported by J--

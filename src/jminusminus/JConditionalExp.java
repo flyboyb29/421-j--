@@ -1,5 +1,7 @@
 package jminusminus;
 
+import static jminusminus.CLConstants.GOTO;
+
 public class JConditionalExp extends JExpression {
 
     private JExpression condition;
@@ -25,6 +27,16 @@ public class JConditionalExp extends JExpression {
 
     @Override
     public void codegen(CLEmitter output) {
+//    	condition consequent alternate
+    	String elseLabel = output.createLabel();
+        String endLabel = output.createLabel();
+        
+        condition.codegen(output, elseLabel, false);
+        consequent.codegen(output);
+        output.addBranchInstruction(GOTO, endLabel);
+        output.addLabel(elseLabel);
+        alternate.codegen(output);
+        output.addLabel(endLabel);
     }
 
 
