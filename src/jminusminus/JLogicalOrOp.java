@@ -14,15 +14,15 @@ class JLogicalOrOp extends JBooleanBinaryExpression {
 		return this;
 	}
   
-	public void codegen(CLEmitter output, String targetLabel, boolean onTrue) {
-		if (onTrue) {
+	public void codegen(CLEmitter output, String target, boolean isTrue) {
+		if (isTrue) {
 			String falseLabel = output.createLabel();
 			this.lhs.codegen(output, falseLabel, false);
-			this.rhs.codegen(output, targetLabel, true);
+			this.rhs.codegen(output, target, true);
 			output.addLabel(falseLabel);
 		} else {
-			this.lhs.codegen(output, targetLabel, false);
-			this.rhs.codegen(output, targetLabel, false);
+			this.lhs.codegen(output, target, false);
+			this.rhs.codegen(output, target, false);
 		}
 	}
 }
